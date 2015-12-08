@@ -1,0 +1,53 @@
+.header {
+  height: 44px;
+  line-height: 44px;
+  background-color: #fff;
+  min-width: 970px;
+  box-shadow: 0 0 4px 4px  rgba(0, 0, 0, 0.22);
+  .content {
+    width: 970px;
+    margin: 0 auto;
+    font-size: $font-size-normal;
+    font-weight: 500;
+    color: $color-text;
+  }
+  .logo {
+    width: 94px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+  .search {
+    width: 276px;
+    height: 28px;
+    background: url('../static/images/qbar_light@2x.png') center center no-repeat;
+    background-size: 276px 28px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    .input {
+      border: none;
+      width: 222px;
+      height: 26px;
+      margin-left: 30px;
+      background-color: transparent;
+      font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important;
+      font-size: 12px;
+      line-height: 16px;
+      outline: none;
+      float: left;
+    }
+  }
+  .user-action {
+    display: inline-block;
+    float: right;
+    a {
+      color: $color-text-dark;
+      margin-left: 14px;
+      &:hover {
+        color: #99a;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+body{
+  font-family: $font;
+  font-size: $font-size-normal;
+  color: $color-text;
+  background: $color-bg;
+}
+a{
+  color: $color-text;
+  text-decoration: none;
+  &:link,
+  &:active,
+  &:visited{
+    color: $color-text;
+  }
+}
