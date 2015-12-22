@@ -1,6 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
-
+var path    = require('path');
+var webpack = require('webpack');
 
 
 module.exports = {
@@ -22,14 +21,18 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: [ 'babel' ],
+      loaders: ['babel'],
+      exclude: /node_modules/
+    }, {
+      test: /\.json$/,
+      loaders: ['json'],
       exclude: /node_modules/
     }, {
       test: /\.scss?$/,
       loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-    },{
+    }, {
       test: /\.(png|jpg)$/,
       loader: 'url?limit=25000'
     }]
   }
-}
+};

@@ -1,11 +1,12 @@
 .header {
-  height: 44px;
-  line-height: 44px;
+  height: 45px;
+  line-height:45px;
   background-color: #fff;
   min-width: 970px;
-  box-shadow: 0 0 4px 4px  rgba(0, 0, 0, 0.22);
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.10);
   .content {
     width: 970px;
+    height: 45px;
     margin: 0 auto;
     font-size: $font-size-normal;
     font-weight: 500;
@@ -14,17 +15,15 @@
   .logo {
     width: 94px;
     height: 30px;
-    display: inline-block;
-    vertical-align: middle;
     margin-right: 20px;
+    padding-top: 7px;
   }
-  .search {
+  .search-input {
     width: 276px;
     height: 28px;
     background: url('../static/images/qbar_light@2x.png') center center no-repeat;
     background-size: 276px 28px;
     display: inline-block;
-    vertical-align: middle;
     position: relative;
     .input {
       border: none;
@@ -39,7 +38,7 @@
       float: left;
     }
   }
-  .user-action {
+  .user-link {
     display: inline-block;
     float: right;
     a {

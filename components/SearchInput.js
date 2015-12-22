@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 
 class SearchInput extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       text: this.props.text || ''
     }
@@ -14,7 +14,7 @@ class SearchInput extends Component {
   }
 
   handleSubmit(e) {
-    const text = e.target.value.trim()
+    const text = e.target.value.trim();
     if (e.which === 13) {
       window.open('https://www.google.com/search?q=site:v2ex.com/t%20' + text)
     }
@@ -22,7 +22,7 @@ class SearchInput extends Component {
 
   render() {
     return (
-      <inputWrap className="search">
+      <inputWrap className="search-input">
         <input className="input"
                type="text"
                placeholder={this.props.placeholder}
@@ -37,6 +37,6 @@ class SearchInput extends Component {
 SearchInput.propTypes = {
   text: PropTypes.string,
   placeholder: PropTypes.string
-}
+};
 
 export default SearchInput
