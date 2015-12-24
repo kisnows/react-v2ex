@@ -1,0 +1,15 @@
+.topic-hot {
+  .item {
+    a {
+      display: inline-block;
+      vertical-align: middle;
+      &:first-child {
+        width: 24px;
+        margin-right: 10px;
+      }
+      &:last-child {
+        width: 216px;
+      }
+    }
+  }
+}

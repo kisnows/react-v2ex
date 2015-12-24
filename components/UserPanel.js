@@ -18,7 +18,7 @@ class UserPanel extends Component {
           </div>
           <div className="inner">
             <a href="v2ex.com/signup" className="button">现在注册</a>
-            <div>已注册的用户请 <a href="v2ex.com/signin">登录</a></div>
+            <div>已注册用户请&nbsp;&nbsp;<a href="v2ex.com/signin">登录</a></div>
           </div>
         </div>
       )

@@ -12,7 +12,7 @@ class TopicsHot extends Component {
   }
   render() {
     return (
-      <div className="TopicHot">
+      <div className="topic-hot box">
         <div className="cell">
           <span className="fade">今日热议主题</span>
         </div>
@@ -34,7 +34,7 @@ class TopicsHotItem extends Component {
   }
 
   render() {
-    var memberUrl = "v2ex.com/member/" + this.props.member.username;
+    let memberUrl = "v2ex.com/member/" + this.props.member.username;
     return (
       <div className="item cell">
         <a href={memberUrl}>

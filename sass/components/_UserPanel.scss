@@ -1,0 +1,15 @@
+.user-panel {
+  background: $color-box-bg;
+  border-radius: 4px;
+  color: #000;
+  strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .inner {
+    text-align: center;
+  }
+  .button {
+    margin-bottom: 8px;
+  }
+}

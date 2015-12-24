@@ -1,7 +1,15 @@
 @import "normalize";
+
 //setting
 @import "config";
 @import "global";
 
 //components
 @import "components/Header";
+@import "components/UserPanel";
+@import "components/TopicHot";
+@import "components/CommunityStatus";
+@import "components/Main";
+@import "components/Footer";
+//page
+@import "page";

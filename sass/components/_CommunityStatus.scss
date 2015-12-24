@@ -1,0 +1,18 @@
+.community-status {
+  .cell {
+    div {
+      padding: 5px 0;
+    }
+    &-title {
+      display: inline-block;
+      width: 50px;
+      text-align: right;
+      color: #999;
+      margin-right: 10px;
+    }
+    &-content {
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}

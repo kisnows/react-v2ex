@@ -1,15 +1,79 @@
-body{
+body {
   font-family: $font;
   font-size: $font-size-normal;
   color: $color-text;
   background: $color-bg;
 }
-a{
+
+a {
   color: $color-text;
   text-decoration: none;
+  &:hover {
+    color: #4d5256;
+    text-decoration: underline;
+  }
   &:link,
   &:active,
-  &:visited{
+  &:visited {
     color: $color-text;
   }
+}
+
+.clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  *zoom: 1;
+}
+
+.box {
+  background-color: $color-box-bg;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid $color-bg;
+}
+
+.cell {
+  padding: 10px;
+  font-size: 12px;
+  line-height: 120%;
+  text-align: left;
+  border-bottom: 1px solid $color-bg;
+}
+
+.inner {
+  padding: 10px;
+  font-size: 12px;
+  line-height: 150%;
+  text-align: left;
+}
+
+.fade {
+  color: #ccc;
+}
+
+a.button {
+  display: inline-block;
+  height: 14px;
+  line-height: 14px;
+  padding: 4px 15px 4px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  background: #fff url(http://v2ex.com/static/img/bg_blended_light.png);
+  text-shadow: 0px 1px 0px #fff;
+  text-decoration: none;
+  box-shadow: 0px 1px 0px rgba(66, 66, 77, 0.1);
+  border: 1px solid rgba(80, 80, 90, 0.2);
+  border-bottom-color: rgba(80, 80, 90, 0.35);
+  border-radius: 3px;
+  outline: none;
+}
+
+.chevron {
+  font-family: "Lucida Grande";
+  font-weight: 500;
+  margin-right: 4px;
 }

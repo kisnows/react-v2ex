@@ -1,0 +1,20 @@
+.v2ex {
+  .header {
+    margin-bottom: 20px;
+  }
+  .main-body {
+    width: 970px;
+    margin: 0 auto;
+    .main {
+      width: 680px;
+      float: left;
+    }
+    .right-bar {
+      width: 270px;
+      float: right;
+      .box {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
