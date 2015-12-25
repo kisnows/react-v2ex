@@ -4,7 +4,7 @@
  * Created 2015-12-21
  */
 import React, { PropTypes, Component } from 'react'
-import getData from '../utils/getData'
+import {ajax} from '../utils/getData'
 import Hot from '../api/hot.json'
 import Latest from '../api/latest.json'
 
@@ -14,8 +14,8 @@ class MainItem extends Component {
   }
 
   render() {
-    let memberUrl  = "v2ex.com/member/" + this.props.member.username;
-    let modifyTime = '21分钟';
+    let memberUrl  = "http://v2ex.com/member/" + this.props.member.username;
+    let modifyTime = (Math.random() * (1 - 60) + 60).toFixed(0) + '分钟';
     return (
       <div className="cell item main-item">
         <div className="main-user-avatar">
@@ -37,12 +37,11 @@ class MainItem extends Component {
     )
   }
 }
-
 export default class Main extends Component {
   constructor() {
     super();
     this.state = {
-      data: Hot,
+      data: Latest,
       count: 0
     }
   }
@@ -59,9 +58,9 @@ export default class Main extends Component {
       e.target.className = 'tab_current';
     }
     if (this.state.count % 2 === 0) {
-      this.setState({data: Hot})
-    } else {
       this.setState({data: Latest})
+    } else {
+      this.setState({data: Hot})
     }
     this.state.count++;
   }

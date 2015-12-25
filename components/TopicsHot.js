@@ -34,7 +34,7 @@ class TopicsHotItem extends Component {
   }
 
   render() {
-    let memberUrl = "v2ex.com/member/" + this.props.member.username;
+    let memberUrl = "http://v2ex.com/member/" + this.props.member.username;
     return (
       <div className="item cell">
         <a href={memberUrl}>

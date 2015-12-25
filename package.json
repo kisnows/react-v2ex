@@ -4,19 +4,19 @@
   "description": "v2ex demo power by react",
   "scripts": {
     "dev": "node server.js --devtool eval --progress --colors --hot",
-    "deploy": "set NODE_ENV=production&node server.js",
+    "deploy": "set NODE_ENV=production&webpack -p --progress --profile -colors",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rackt/redux.git"
+    "url": "https://github.com/kisnows/react-v2ex"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rackt/redux/issues"
+    "url": "https://github.com/kisnows/react-v2ex/issues"
   },
-  "homepage": "http://rackt.github.io/redux",
+  "homepage": "http://kisnows.com/react-v2ex",
   "dependencies": {
     "classnames": "^2.1.2",
     "json-loader": "^0.5.4",

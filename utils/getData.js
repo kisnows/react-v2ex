@@ -17,3 +17,5 @@ function ajax(url, cb) {
     }
   }
 }
+
+export {ajax}
