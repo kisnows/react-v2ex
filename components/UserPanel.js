@@ -26,4 +26,8 @@ class UserPanel extends Component {
   }
 }
 
+UserPanel.propTypes = {
+  isLogin: PropTypes.string
+};
+
 export default UserPanel
