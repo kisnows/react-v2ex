@@ -34,7 +34,7 @@ export default class Footer extends Component {
                 <img src="http://v2ex.com/static/img/lang_zhcn_32.png" width="20"/></a>
             </div>
             <p className="describe-top">创意工作者们的社区</p>
-            <p className="describe-bottom">World is powered by solitude</p>
+            <p className="describe-bottom">This DEMO is create by <a href="http://kisnows.com">Kisnows</a></p>
             <span className="small fade">VERSION: 3.9.2 · 23ms · UTC 12:10 · PVG 20:10 · LAX 04:10 · JFK 07:10<br />♥ Do have faith in what you're doing.</span>
             <span className="f12 gray"><a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow">沪ICP备15015613号-1</a></span>
           </div>

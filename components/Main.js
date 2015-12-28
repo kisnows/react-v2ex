@@ -24,7 +24,7 @@ class MainItem extends Component {
           </a>
         </div>
         <div className="main-content">
-          <a className="item-title" href={this.props.url}>{this.props.title}</a>
+          <div className="item-title"><a href={this.props.url}>{this.props.title}</a></div>
           <span className="small fade">
             <a className="node" href={this.props.node.url}>{this.props.node.title}</a> &nbsp;•&nbsp;
             <strong><a href={memberUrl}>{this.props.member.username}</a></strong> &nbsp;•&nbsp; {modifyTime}前

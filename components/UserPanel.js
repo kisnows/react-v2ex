@@ -17,8 +17,8 @@ class UserPanel extends Component {
             <span className="fade">V2EX 是一个关于分享和探索的地方</span>
           </div>
           <div className="inner">
-            <a href="v2ex.com/signup" className="button">现在注册</a>
-            <div>已注册用户请&nbsp;&nbsp;<a href="v2ex.com/signin">登录</a></div>
+            <a href="https://v2ex.com/signup" className="button">现在注册</a>
+            <div>已注册用户请&nbsp;&nbsp;<a href="https://v2ex.com/signin">登录</a></div>
           </div>
         </div>
       )

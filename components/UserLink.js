@@ -15,7 +15,7 @@ class UserLink extends Component {
     } else {
       return (
         <div className="user-link">
-          <a href="www.v2ex.com">首页</a>
+          <a href="https://www.v2ex.com">首页</a>
           <a href="https://www.v2ex.com/signup">注册</a>
           <a href="https://www.v2ex.com/signin">登录</a>
         </div>
