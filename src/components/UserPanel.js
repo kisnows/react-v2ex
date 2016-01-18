@@ -1,4 +1,4 @@
-import React, {PropTypes, Component } from 'react';
+import React, { PropTypes, Component } from 'react'
 
 class UserPanel extends Component {
 
@@ -28,6 +28,6 @@ class UserPanel extends Component {
 
 UserPanel.propTypes = {
   isLogin: PropTypes.string
-};
+}
 
 export default UserPanel

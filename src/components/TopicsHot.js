@@ -3,13 +3,14 @@
  * @author kisnows
  * Created 2015-12-21
  */
-import React, {PropTypes, Component } from 'react';
-import Hot from '../api/hot.json';
+import React, { PropTypes, Component } from 'react'
+import Hot from '../api/hot.json'
 
 class TopicsHot extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
+
   render() {
     return (
       <div className="topic-hot box">
@@ -18,9 +19,7 @@ class TopicsHot extends Component {
         </div>
         <div>
           {Hot.map((topic, index) =>
-            <TopicsHotItem {...topic}
-              key={index}
-            />
+            <TopicsHotItem {...topic} key={index}/>
           )}
         </div>
       </div>
@@ -30,11 +29,11 @@ class TopicsHot extends Component {
 
 class TopicsHotItem extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
-    let memberUrl = "http://v2ex.com/member/" + this.props.member.username;
+    let memberUrl = 'http://v2ex.com/member/' + this.props.member.username
     return (
       <div className="item cell">
         <a href={memberUrl}>
@@ -44,5 +43,11 @@ class TopicsHotItem extends Component {
       </div>
     )
   }
+}
+
+TopicsHot.propType = {
+  member: PropTypes.object.isRequired,
+  url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 }
 export default TopicsHot

@@ -3,7 +3,7 @@
  * @author kisnows
  * Created 2015-12-24
  */
-import React, {PropTypes, Component } from 'react';
+import React, { Component } from 'react'
 
 export default class CommunityStatus extends Component {
   render() {

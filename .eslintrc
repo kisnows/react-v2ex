@@ -1,8 +1,6 @@
 {
   "extends": "rackt",
   "rules": {
-    "valid-jsdoc": 2,
-    // Disable until Flow supports let and const
     "no-var": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-no-undef": 2,

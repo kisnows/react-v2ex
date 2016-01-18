@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 import SearchInput from './SearchInput'
 import UserLink from './UserLink'
 
@@ -15,5 +15,6 @@ class Header extends Component {
     )
   }
 }
+
 
 export default Header

@@ -3,43 +3,14 @@
  * @author kisnows
  * Created 2015-12-21
  */
-import React, { PropTypes, Component } from 'react'
-import {ajax} from '../utils/getData'
+import React, { Component } from 'react'
+import MainItem from './MainItem'
 import Hot from '../api/hot.json'
 import Latest from '../api/latest.json'
 
-class MainItem extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    let memberUrl  = "http://v2ex.com/member/" + this.props.member.username;
-    let modifyTime = (Math.random() * (1 - 60) + 60).toFixed(0) + '分钟';
-    return (
-      <div className="cell item main-item">
-        <div className="main-user-avatar">
-          <a href={memberUrl}>
-            <img src={this.props.member.avatar_normal} alt={this.props.member.username}/>
-          </a>
-        </div>
-        <div className="main-content">
-          <div className="item-title"><a href={this.props.url}>{this.props.title}</a></div>
-          <span className="small fade">
-            <a className="node" href={this.props.node.url}>{this.props.node.title}</a> &nbsp;•&nbsp;
-            <strong><a href={memberUrl}>{this.props.member.username}</a></strong> &nbsp;•&nbsp; {modifyTime}前
-          </span>
-        </div>
-        <div className="main-comment">
-          <a href={this.props.url} className="count_livid">{this.props.replies}</a>
-        </div>
-      </div>
-    )
-  }
-}
 export default class Main extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       data: Latest,
       count: 0
@@ -49,20 +20,20 @@ export default class Main extends Component {
   handleClick(e) {
     if (e.target.tagName.toLowerCase() === 'span') {
       if (this.className === 'tab_current') {
-        return false;
+        return false
       }
-      let tabs = document.querySelector('#Tabs').querySelectorAll('span');
+      let tabs = document.querySelector('#Tabs').querySelectorAll('span')
       Array.prototype.slice.call(tabs).forEach(function (el) {
-        el.className = 'tab';
-      });
-      e.target.className = 'tab_current';
+        el.className = 'tab'
+      })
+      e.target.className = 'tab_current'
     }
     if (this.state.count % 2 === 0) {
-      this.setState({data: Latest})
+      this.setState({ data: Latest })
     } else {
-      this.setState({data: Hot})
+      this.setState({ data: Hot })
     }
-    this.state.count++;
+    this.state.count++
   }
 
   render() {
@@ -83,12 +54,11 @@ export default class Main extends Component {
         </div>
         <div>
           {this.state.data.map((topic, index) =>
-            <MainItem {...topic}
-              key={index}
-            />
+            <MainItem {...topic} key={index}/>
           )}
         </div>
       </div>
     )
   }
 }
+

@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 
 class UserLink extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
@@ -19,13 +19,13 @@ class UserLink extends Component {
           <a href="https://www.v2ex.com/signup">注册</a>
           <a href="https://www.v2ex.com/signin">登录</a>
         </div>
-      );
+      )
     }
   }
 }
 
 UserLink.propTypes = {
   isLogin: PropTypes.string
-};
+}
 
 export default UserLink
