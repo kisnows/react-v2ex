@@ -15,6 +15,7 @@ export default class Footer extends Component {
               <a href="https://www.digitalocean.com/?refcode=1b51f1a7651d" target="_blank">
                 <img src="http://v2ex.com/static/img/do.png" width="64" border="0" alt="DigitalOcean"/>
               </a>
+              
             </div>
             <div className="top-link">
               <strong>

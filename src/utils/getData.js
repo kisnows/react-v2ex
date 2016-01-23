@@ -1,21 +1,26 @@
 /**
- * $.ajax.js
+ * get.js
  * @author kisnows
  * Created 2015-12-24
  */
-function ajax(url, cb) {
-  let xhr = new XMLHttpRequest
-  xhr.open('GET', url, true)
-  xhr.setRequestHeader('Content-type', 'application/json')
-  xhr.send(null)
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      var data = JSON.parse(xhr.responseText)
-      if (typeof cb === 'function') {
-        cb.call(this, data)
+function get(url) {
+  return new Promise(function (resolve,reject) {
+    var xhr = new XMLHttpRequest
+    xhr.open('GET', url, true)
+    xhr.responseType = 'json'
+    xhr.setRequestHeader('Content-type', 'application/json')
+    xhr.send(null)
+    xhr.onreadystatechange = function () {
+      if(this.readyState !== 4){
+        return
+      }
+      if(this.status === 200){
+        resolve(this.response)
+      }else{
+        reject(this.status)
       }
     }
-  }
+  })
 }
 
-export { ajax }
+export { get }

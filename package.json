@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "v2ex demo power by react",
   "scripts": {
-    "lint": "eslint src test ./src/**.js",
+    "lint": "eslint src test ./src/*.*",
     "dev": "node server.js --devtool eval --progress --colors --hot",
     "deploy": "set NODE_ENV=production&webpack -p --progress --profile -colors"
   },

@@ -10,9 +10,13 @@ app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.
 app.use(webpackHotMiddleware(compiler));
 
 app.get("/", function(req, res) {
-  res.sendFile(__dirname + '/index.html')
+  res.sendFile(__dirname + '/src/index.html')
 });
 
+app.get("/api/:name.json",function(req,res){
+  var name = req.params.name
+  res.sendFile(__dirname + '/api/'+name+'.json')
+})
 app.listen(port, function(error) {
   if (error) {
     console.error(error)

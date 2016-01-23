@@ -5,19 +5,35 @@
  */
 import React, { Component } from 'react'
 import MainItem from './MainItem'
-import Hot from '../api/hot.json'
-import Latest from '../api/latest.json'
+import { get } from '../utils/getData'
 
 export default class Main extends Component {
   constructor() {
     super()
     this.state = {
-      data: Latest,
+      hot: [],
+      latest: [],
       count: 0
     }
   }
 
+  componentDidMount() {
+    const _this = this
+    get('/api/hot.json').then(function (data) {
+      // console.log(data)
+      _this.setState( { hot: data })
+    }).catch(function (err) {
+      console.error( err )
+    })
+    get('/api/latest.json').then(function (data) {
+      _this.setState({ latest: data })
+    }).catch(function (err) {
+      console.error(err)
+    })
+  }
+
   handleClick(e) {
+    let count = this.state.count
     if (e.target.tagName.toLowerCase() === 'span') {
       if (this.className === 'tab_current') {
         return false
@@ -27,16 +43,21 @@ export default class Main extends Component {
         el.className = 'tab'
       })
       e.target.className = 'tab_current'
+      this.setState({ count: ++count })
     }
-    if (this.state.count % 2 === 0) {
-      this.setState({ data: Latest })
-    } else {
-      this.setState({ data: Hot })
-    }
-    this.state.count++
   }
 
   render() {
+    let style = [{
+      display: 'block'
+    },{
+      display: 'none'
+    }]
+
+    if(this.state.count % 2 === 0){
+      style.reverse()
+    }
+
     return (
       <div className="main box">
         <div className="cell tabs" id="Tabs" onClick={this.handleClick.bind(this)}>
@@ -52,13 +73,17 @@ export default class Main extends Component {
           <span className="tab">全部</span>
           <span className="tab">R2</span>
         </div>
-        <div>
-          {this.state.data.map((topic, index) =>
-            <MainItem {...topic} key={index}/>
-          )}
-        </div>
+          <div style={ style[0] }>
+            {this.state.hot.map((topic, index) =>
+              <MainItem {...topic} key={index}/>
+            )}
+          </div>
+          <div style={ style[1] }>
+            {this.state.latest.map((topic, index) =>
+              <MainItem {...topic} key={index}/>
+            )}
+          </div>
       </div>
     )
   }
 }
-

@@ -1,11 +1,11 @@
-var path    = require('path');
-var webpack = require('webpack');
+var path    = require('path')
+var webpack = require('webpack')
 
 var config = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './index'
+    './src/index'
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -17,9 +17,12 @@ var config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
+  resolve: {
+    extensions: ['','.js','.jsx']
+  },
   module: {
     loaders: [{
-      test: /\.js$/,
+      test: /\.(js|jsx)$/,
       loaders: ['babel'],
       exclude: /node_modules/
     }, {
@@ -28,14 +31,14 @@ var config = {
       exclude: /node_modules/
     }, {
       test: /\.scss?$/,
-      loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+      loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
     }, {
       test: /\.(png|jpg)$/,
       loader: 'url?limit=25000'
     }]
   }
-};
-if (process.env.NODE_ENV === 'production') {
-  config.entry = ['./index'];
 }
-module.exports = config;
+if (process.env.NODE_ENV === 'production') {
+  config.entry = ['./src/index']
+}
+module.exports = config
