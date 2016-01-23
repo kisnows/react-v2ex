@@ -1,0 +1,438 @@
+[
+  {
+    "id": 245953,
+    "title": "pandas 里关于日期的处理",
+    "url": "http://www.v2ex.com/t/245953",
+    "content": "最近想玩玩 tushare ，有几个问题：\u000D\u000A1 、比如我从 csv 中读入股票的数据，存入到 DataFrame 里： df\u003Dpd.read_csv(FileDir, index_col\u003D\u0022date\u0022, encoding\u003D\u0027gbk\u0027)。此时 date 作为 index ，那么之后调用排序 df.sort_values 就无法使用 date 进行。只能选用其它 column （比如 open 、 close 等）进行排序。也就是说 df.sort_values(by\u003D[\u0027date\u0027])出错，而 df.sort_values(by\u003D[\u0027close\u0027])正常。\u000D\u000A所以目前我只能修改为 df\u003Dpd.read_csv(FileDir, encoding\u003D\u0027gbk\u0027)，这样 df 的数据就类似于：\u000D\u000A date   open   high  close    low    volume  price_change  p_change  \u005C\u000D\u000A0  2015\u002D12\u002D22  25.45  25.60  25.34  24.83  23069.91         \u002D0.10     \u002D0.39   \u000D\u000A1  2015\u002D12\u002D21  25.65  25.95  25.44  25.01  34771.50         \u002D0.42     \u002D1.62 \u000D\u000A这时 index 就是从 0 开始的整数。如果调用 df.sort_values(by\u003D[\u0027date\u0027])， index 也会相应调整成这样:\u000D\u000A  date  open  high  close   low    volume  price_change  p_change  \u005C\u000D\u000A584  2012\u002D12\u002D24  5.40  5.44   5.41  5.35   5436.09          0.01      0.18   \u000D\u000A583  2012\u002D12\u002D25  5.41  5.58   5.52  5.36  17887.64          0.11      2.03   \u000D\u000A但是我希望 index 不参与排序\u000D\u000A2 、我想对 df 的 open 或者 close 数据画图，比如 x 轴为 date ， y 轴为 open ，日期该如何转换？\u000D\u000A因为我直接调用 plt.plot(df[\u0027date\u0027], df[\u0027close\u0027])就会出错。",
+    "content_rendered": "最近想玩玩 tushare ，有几个问题：\u000D\u003Cbr /\u003E1 、比如我从 csv 中读入股票的数据，存入到 DataFrame 里： df\u003Dpd.read_csv(FileDir, index_col\u003D\u0026quot\u003Bdate\u0026quot\u003B, encoding\u003D\u0027gbk\u0027)。此时 date 作为 index ，那么之后调用排序 df.sort_values 就无法使用 date 进行。只能选用其它 column （比如 open 、 close 等）进行排序。也就是说 df.sort_values(by\u003D[\u0027date\u0027])出错，而 df.sort_values(by\u003D[\u0027close\u0027])正常。\u000D\u003Cbr /\u003E所以目前我只能修改为 df\u003Dpd.read_csv(FileDir, encoding\u003D\u0027gbk\u0027)，这样 df 的数据就类似于：\u000D\u003Cbr /\u003E date   open   high  close    low    volume  price_change  p_change  \u005C\u000D\u003Cbr /\u003E0  2015\u002D12\u002D22  25.45  25.60  25.34  24.83  23069.91         \u002D0.10     \u002D0.39   \u000D\u003Cbr /\u003E1  2015\u002D12\u002D21  25.65  25.95  25.44  25.01  34771.50         \u002D0.42     \u002D1.62 \u000D\u003Cbr /\u003E这时 index 就是从 0 开始的整数。如果调用 df.sort_values(by\u003D[\u0027date\u0027])， index 也会相应调整成这样:\u000D\u003Cbr /\u003E  date  open  high  close   low    volume  price_change  p_change  \u005C\u000D\u003Cbr /\u003E584  2012\u002D12\u002D24  5.40  5.44   5.41  5.35   5436.09          0.01      0.18   \u000D\u003Cbr /\u003E583  2012\u002D12\u002D25  5.41  5.58   5.52  5.36  17887.64          0.11      2.03   \u000D\u003Cbr /\u003E但是我希望 index 不参与排序\u000D\u003Cbr /\u003E2 、我想对 df 的 open 或者 close 数据画图，比如 x 轴为 date ， y 轴为 open ，日期该如何转换？\u000D\u003Cbr /\u003E因为我直接调用 plt.plot(df[\u0027date\u0027], df[\u0027close\u0027])就会出错。",
+    "replies": 0,
+    "member": {
+      "id": 25261,
+      "username": "moogle",
+      "tagline": "",
+      "avatar_mini": "//cdn.v2ex.co/avatar/5122/eee5/25261_mini.png?m=1344788101",
+      "avatar_normal": "//cdn.v2ex.co/avatar/5122/eee5/25261_normal.png?m=1344788101",
+      "avatar_large": "//cdn.v2ex.co/avatar/5122/eee5/25261_large.png?m=1344788101"
+    },
+    "node": {
+      "id": 90,
+      "name": "python",
+      "title": "Python",
+      "title_alternative": "Python",
+      "url": "http://www.v2ex.com/go/python",
+      "topics": 4169,
+      "avatar_mini": "//cdn.v2ex.co/navatar/8613/985e/90_mini.png?m=1450824590",
+      "avatar_normal": "//cdn.v2ex.co/navatar/8613/985e/90_normal.png?m=1450824590",
+      "avatar_large": "//cdn.v2ex.co/navatar/8613/985e/90_large.png?m=1450824590"
+    },
+    "created": 1450967550,
+    "last_modified": 1450967550,
+    "last_touched": 1450967370
+  }, {
+  "id": 245952,
+  "title": "大家都是怎样理财的",
+  "url": "http://www.v2ex.com/t/245952",
+  "content": "工作两年了，过年算算身上就三万不到，好歹也算是年薪十万…真不知道钱都用哪里去了，衣服穿的一看就是屌丝程序员，还用着个小米。想想往后成家立业可怎么办…大家平时都是怎么理财呢？",
+  "content_rendered": "工作两年了，过年算算身上就三万不到，好歹也算是年薪十万…真不知道钱都用哪里去了，衣服穿的一看就是屌丝程序员，还用着个小米。想想往后成家立业可怎么办…大家平时都是怎么理财呢？",
+  "replies": 2,
+  "member": {
+    "id": 113774,
+    "username": "onceyoung",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/71c7/6045/113774_mini.png?m=1445267529",
+    "avatar_normal": "//cdn.v2ex.co/avatar/71c7/6045/113774_normal.png?m=1445267529",
+    "avatar_large": "//cdn.v2ex.co/avatar/71c7/6045/113774_large.png?m=1445267529"
+  },
+  "node": {
+    "id": 12,
+    "name": "qna",
+    "title": "问与答",
+    "title_alternative": "Questions and Answers",
+    "url": "http://www.v2ex.com/go/qna",
+    "topics": 61884,
+    "avatar_mini": "//cdn.v2ex.co/navatar/c20a/d4d7/12_mini.png?m=1448889637",
+    "avatar_normal": "//cdn.v2ex.co/navatar/c20a/d4d7/12_normal.png?m=1448889637",
+    "avatar_large": "//cdn.v2ex.co/navatar/c20a/d4d7/12_large.png?m=1448889637"
+  },
+  "created": 1450967137,
+  "last_modified": 1450967194,
+  "last_touched": 1450967973
+}, {
+  "id": 245951,
+  "title": "太诡异了， Facebook 账号被盗号了？！突然感觉好恐怖啊",
+  "url": "http://www.v2ex.com/t/245951",
+  "content": "http://ww2.sinaimg.cn/large/86a81bfbgw1ezb46qgk19j20e8066q3t.jpg",
+  "content_rendered": "\u003Cimg src\u003D\u0022http://ww2.sinaimg.cn/large/86a81bfbgw1ezb46qgk19j20e8066q3t.jpg\u0022 class\u003D\u0022imgly\u0022 style\u003D\u0022max\u002Dwidth: 660px\u003B\u0022 border\u003D\u00220\u0022 /\u003E ",
+  "replies": 4,
+  "member": {
+    "id": 28958,
+    "username": "langqianyi",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/d6a1/4995/28958_mini.png?m=1409445073",
+    "avatar_normal": "//cdn.v2ex.co/avatar/d6a1/4995/28958_normal.png?m=1409445073",
+    "avatar_large": "//cdn.v2ex.co/avatar/d6a1/4995/28958_large.png?m=1409445073"
+  },
+  "node": {
+    "id": 12,
+    "name": "qna",
+    "title": "问与答",
+    "title_alternative": "Questions and Answers",
+    "url": "http://www.v2ex.com/go/qna",
+    "topics": 61884,
+    "avatar_mini": "//cdn.v2ex.co/navatar/c20a/d4d7/12_mini.png?m=1448889637",
+    "avatar_normal": "//cdn.v2ex.co/navatar/c20a/d4d7/12_normal.png?m=1448889637",
+    "avatar_large": "//cdn.v2ex.co/navatar/c20a/d4d7/12_large.png?m=1448889637"
+  },
+  "created": 1450967104,
+  "last_modified": 1450967104,
+  "last_touched": 1450967811
+}, {
+  "id": 245950,
+  "title": "刚刚发现两个神奇的动画效果",
+  "url": "http://www.v2ex.com/t/245950",
+  "content": "OS X 系统下面，按住 shift ，再吧你的浏览器最小化，咦？怎么动画变慢了。 dock 打开也是一样。\u000D\u000A还有就是按住 shift + ctrl 再把光标放到 dock 上面去，图标就会很大。",
+  "content_rendered": "OS X 系统下面，按住 shift ，再吧你的浏览器最小化，咦？怎么动画变慢了。 dock 打开也是一样。\u000D\u003Cbr /\u003E还有就是按住 shift + ctrl 再把光标放到 dock 上面去，图标就会很大。",
+  "replies": 0,
+  "member": {
+    "id": 99417,
+    "username": "sengxian",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/2483/9e12/99417_mini.png?m=1438747137",
+    "avatar_normal": "//cdn.v2ex.co/avatar/2483/9e12/99417_normal.png?m=1438747137",
+    "avatar_large": "//cdn.v2ex.co/avatar/2483/9e12/99417_large.png?m=1438747137"
+  },
+  "node": {
+    "id": 16,
+    "name": "share",
+    "title": "分享发现",
+    "title_alternative": "Share",
+    "url": "http://www.v2ex.com/go/share",
+    "topics": 17745,
+    "avatar_mini": "//cdn.v2ex.co/navatar/c74d/97b0/16_mini.png?m=1448889669",
+    "avatar_normal": "//cdn.v2ex.co/navatar/c74d/97b0/16_normal.png?m=1448889669",
+    "avatar_large": "//cdn.v2ex.co/navatar/c74d/97b0/16_large.png?m=1448889669"
+  },
+  "created": 1450966971,
+  "last_modified": 1450966971,
+  "last_touched": 1450966791
+}, {
+  "id": 245947,
+  "title": "再見，杭州",
+  "url": "http://www.v2ex.com/t/245947",
+  "content": "http://lepture.com/zh/2015/beloved\u002Dhangzhou\u000D\u000A\u000D\u000A每一次短暫的離去，過後總是回想起杭州的好處，忘卻了討人厭的陰雨天氣。",
+  "content_rendered": "\u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022http://lepture.com/zh/2015/beloved\u002Dhangzhou\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttp://lepture.com/zh/2015/beloved\u002Dhangzhou\u003C/a\u003E\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E每一次短暫的離去，過後總是回想起杭州的好處，忘卻了討人厭的陰雨天氣。",
+  "replies": 6,
+  "member": {
+    "id": 1205,
+    "username": "lepture",
+    "tagline": "Love its people, but never trust its government.",
+    "avatar_mini": "//cdn.v2ex.co/avatar/b571/ecea/1205_mini.png?m=1418210940",
+    "avatar_normal": "//cdn.v2ex.co/avatar/b571/ecea/1205_normal.png?m=1418210940",
+    "avatar_large": "//cdn.v2ex.co/avatar/b571/ecea/1205_large.png?m=1418210940"
+  },
+  "node": {
+    "id": 26,
+    "name": "hangzhou",
+    "title": "杭州",
+    "title_alternative": "Hangzhou",
+    "url": "http://www.v2ex.com/go/hangzhou",
+    "topics": 303,
+    "avatar_mini": "/static/img/node_mini.png",
+    "avatar_normal": "/static/img/node_normal.png",
+    "avatar_large": "/static/img/node_large.png"
+  },
+  "created": 1450966200,
+  "last_modified": 1450966200,
+  "last_touched": 1450968334
+}, {
+  "id": 245946,
+  "title": "#RapidData# * PacificIDC 机房 KVM 虚拟服务器来了！* 10 元/月 起！ *",
+  "url": "http://www.v2ex.com/t/245946",
+  "content": "Hi,V2EXer ！\u000D\u000A\u000D\u000A首先，给大家说一声 MERRY CHRISTMAS!圣诞节快乐！\u000D\u000A\u000D\u000A其次，我们带来了最新的优惠！真正的圣诞节优惠来了！\u000D\u000APacificIDC 机房 KVM 虚拟服务器！ 最低 10 元 /月起！\u000D\u000A\u000D\u000A宿主机采用全新硬件，多块全新硬盘+阵列卡组成的 RAID10 ， KVM 企业级虚拟化，具有强大的 IO 且能确保正常稳定。每台宿主机严格控制虚拟服务器数量，确定不超售。智能路由+BGP 网络，使服务器到中国的延迟速度平均在 160\u002D180ms 上下！\u000D\u000A\u000D\u000A\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u000D\u000ABGP 多线：中国电信 / 中国联通 / 中国移动 / PCCW 电讯盈科 – AS3491 / NTT Communications – AS2914 / Psychz – AS40676\u000D\u000A智能路由：引进智能路由平台， 24 小时自动发现丢包、拥堵和潜伏问题，从而提前调试网络路由，以确保最优的产品服务。\u000D\u000A顶级 DDoS 防护：优越的 DDoS 探测、保护和过滤。不断的研究和投入促成了前所未有的发展并提高了安全防范来应对日益频繁的威胁。\u000D\u000AIPv6 支持：完美支持 IPv6 ，如果您有需求，请随时联系我们！\u000D\u000A内外网支持：轻松组建一个集群！外网 IP 不再孤单！\u000D\u000A\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u000D\u000A\u000D\u000A可选产品：这次，我们给大家带来了三款特价产品！支持 月付、季付以及半年付！续费同价！\u000D\u000A\u000D\u000A0x01 ： KVM512\u000D\u000ACPU 1 Core(Up to 3.5Ghz)\u000D\u000A内存 512MB ECC RAM + 512MB SWAP\u000D\u000A硬盘 15GB HDD RAID10 保护\u000D\u000AIP 公网 IPv4*1 / 内网 IPv4*1 / IPv6 可免费申请\u000D\u000A网络 1Gbps 带宽 / 500GB 流量\u000D\u000A费用 ￥ 10/月\u000D\u000A购买 https://my.rapiddata.org/cart.php?a\u003Dadd\u0026pid\u003D52\u000D\u000A\u000D\u000A0x02 ： KVM1024\u000D\u000ACPU 1 Core(Up to 3.5Ghz)\u000D\u000A内存 1024MB ECC RAM + 1024MB SWAP\u000D\u000A硬盘 30GB HDD RAID10 保护\u000D\u000AIP 公网 IPv4*1 / 内网 IPv4*1 / IPv6 可免费申请\u000D\u000A网络 1Gbps 带宽 / 1TB 流量\u000D\u000A费用 ￥ 20/月\u000D\u000A购买 https://my.rapiddata.org/cart.php?a\u003Dadd\u0026pid\u003D54\u000D\u000A\u000D\u000A0x03 ： KVM2048\u000D\u000ACPU 2 Core(Up to 3.5Ghz)\u000D\u000A内存 2048MB ECC RAM + 1024MB SWAP\u000D\u000A硬盘 50GB HDD RAID10 保护\u000D\u000AIP 公网 IPv4*1 / 内网 IPv4*1 / IPv6 可免费申请\u000D\u000A网络 1Gbps 带宽 / 2TB 流量\u000D\u000A费用 ￥ 30/月\u000D\u000A购买 https://my.rapiddata.org/cart.php?a\u003Dadd\u0026pid\u003D55\u000D\u000A\u000D\u000A测试 IPv4 ： 104.255.32.139\u000D\u000A测试 IPv6 ： 2605:e980:d::beef\u000D\u000ALooking Glass ： http://lg.pacificidc.com/\u000D\u000A100MB.test ： http://lg.pacificidc.com/100MB.test\u000D\u000A\u000D\u000A支持在线安装的系统： CentOS 、 Debian\u000D\u000A\u000D\u000A注意事项\u000D\u000A*系统只提供 Linux 系，暂不提供 Windows ，也禁止自行安装 Windows\u000D\u000A*特价 /活动商品一经售出不予退款\u000D\u000A*锐网云计算保留该活动的解释权\u000D\u000A\u000D\u000A                                                                                 RapidData(锐网云计算)\u000D\u000A                                                                                                        2015 年 12 月\u000D\u000A\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u000D\u000ARapidData(锐网云计算) 保留该活动的所有权利。\u000D\u000A售前 QQ 交流群： 461855819        提交工单： http://my.rapiddata.org/submitticket.php\u000D\u000A售前交流群仅供产品咨询,并非售后群,任何使用上的问题请发送工单!\u000D\u000A如果有任何问题,不要犹豫,马上发 E\u002Dmail 和提交工单!我们会第一时间回复您!",
+  "content_rendered": "Hi,V2EXer ！\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E首先，给大家说一声 MERRY CHRISTMAS!圣诞节快乐！\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E其次，我们带来了最新的优惠！真正的圣诞节优惠来了！\u000D\u003Cbr /\u003EPacificIDC 机房 KVM 虚拟服务器！ 最低 10 元 /月起！\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E宿主机采用全新硬件，多块全新硬盘+阵列卡组成的 RAID10 ， KVM 企业级虚拟化，具有强大的 IO 且能确保正常稳定。每台宿主机严格控制虚拟服务器数量，确定不超售。智能路由+BGP 网络，使服务器到中国的延迟速度平均在 160\u002D180ms 上下！\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u000D\u003Cbr /\u003EBGP 多线：中国电信 / 中国联通 / 中国移动 / PCCW 电讯盈科 – AS3491 / NTT Communications – AS2914 / Psychz – AS40676\u000D\u003Cbr /\u003E智能路由：引进智能路由平台， 24 小时自动发现丢包、拥堵和潜伏问题，从而提前调试网络路由，以确保最优的产品服务。\u000D\u003Cbr /\u003E顶级 DDoS 防护：优越的 DDoS 探测、保护和过滤。不断的研究和投入促成了前所未有的发展并提高了安全防范来应对日益频繁的威胁。\u000D\u003Cbr /\u003EIPv6 支持：完美支持 IPv6 ，如果您有需求，请随时联系我们！\u000D\u003Cbr /\u003E内外网支持：轻松组建一个集群！外网 IP 不再孤单！\u000D\u003Cbr /\u003E\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u002D\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E可选产品：这次，我们给大家带来了三款特价产品！支持 月付、季付以及半年付！续费同价！\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E0x01 ： KVM512\u000D\u003Cbr /\u003ECPU 1 Core(Up to 3.5Ghz)\u000D\u003Cbr /\u003E内存 512MB ECC RAM + 512MB SWAP\u000D\u003Cbr /\u003E硬盘 15GB HDD RAID10 保护\u000D\u003Cbr /\u003EIP 公网 IPv4*1 / 内网 IPv4*1 / IPv6 可免费申请\u000D\u003Cbr /\u003E网络 1Gbps 带宽 / 500GB 流量\u000D\u003Cbr /\u003E费用 ￥ 10/月\u000D\u003Cbr /\u003E购买 \u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022https://my.rapiddata.org/cart.php?a\u003Dadd\u0026amp\u003Bpid\u003D52\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttps://my.rapiddata.org/cart.php?a\u003Dadd\u0026amp\u003Bpid\u003D52\u003C/a\u003E\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E0x02 ： KVM1024\u000D\u003Cbr /\u003ECPU 1 Core(Up to 3.5Ghz)\u000D\u003Cbr /\u003E内存 1024MB ECC RAM + 1024MB SWAP\u000D\u003Cbr /\u003E硬盘 30GB HDD RAID10 保护\u000D\u003Cbr /\u003EIP 公网 IPv4*1 / 内网 IPv4*1 / IPv6 可免费申请\u000D\u003Cbr /\u003E网络 1Gbps 带宽 / 1TB 流量\u000D\u003Cbr /\u003E费用 ￥ 20/月\u000D\u003Cbr /\u003E购买 \u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022https://my.rapiddata.org/cart.php?a\u003Dadd\u0026amp\u003Bpid\u003D54\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttps://my.rapiddata.org/cart.php?a\u003Dadd\u0026amp\u003Bpid\u003D54\u003C/a\u003E\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E0x03 ： KVM2048\u000D\u003Cbr /\u003ECPU 2 Core(Up to 3.5Ghz)\u000D\u003Cbr /\u003E内存 2048MB ECC RAM + 1024MB SWAP\u000D\u003Cbr /\u003E硬盘 50GB HDD RAID10 保护\u000D\u003Cbr /\u003EIP 公网 IPv4*1 / 内网 IPv4*1 / IPv6 可免费申请\u000D\u003Cbr /\u003E网络 1Gbps 带宽 / 2TB 流量\u000D\u003Cbr /\u003E费用 ￥ 30/月\u000D\u003Cbr /\u003E购买 \u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022https://my.rapiddata.org/cart.php?a\u003Dadd\u0026amp\u003Bpid\u003D55\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttps://my.rapiddata.org/cart.php?a\u003Dadd\u0026amp\u003Bpid\u003D55\u003C/a\u003E\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E测试 IPv4 ： 104.255.32.139\u000D\u003Cbr /\u003E测试 IPv6 ： 2605:e980:d::beef\u000D\u003Cbr /\u003ELooking Glass ： \u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022http://lg.pacificidc.com/\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttp://lg.pacificidc.com/\u003C/a\u003E\u000D\u003Cbr /\u003E100MB.test ： \u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022http://lg.pacificidc.com/100MB.test\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttp://lg.pacificidc.com/100MB.test\u003C/a\u003E\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E支持在线安装的系统： CentOS 、 Debian\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E注意事项\u000D\u003Cbr /\u003E*系统只提供 Linux 系，暂不提供 Windows ，也禁止自行安装 Windows\u000D\u003Cbr /\u003E*特价 /活动商品一经售出不予退款\u000D\u003Cbr /\u003E*锐网云计算保留该活动的解释权\u000D\u003Cbr /\u003E\u000D\u003Cbr /\u003E                                                                                 RapidData(锐网云计算)\u000D\u003Cbr /\u003E                                                                                                        2015 年 12 月\u000D\u003Cbr /\u003E\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u003D\u000D\u003Cbr /\u003ERapidData(锐网云计算) 保留该活动的所有权利。\u000D\u003Cbr /\u003E售前 QQ 交流群： 461855819        提交工单： \u003Ca target\u003D\u0022_blank\u0022 href\u003D\u0022http://my.rapiddata.org/submitticket.php\u0022 rel\u003D\u0022nofollow\u0022\u003Ehttp://my.rapiddata.org/submitticket.php\u003C/a\u003E\u000D\u003Cbr /\u003E售前交流群仅供产品咨询,并非售后群,任何使用上的问题请发送工单!\u000D\u003Cbr /\u003E如果有任何问题,不要犹豫,马上发 E\u002Dmail 和提交工单!我们会第一时间回复您!",
+  "replies": 1,
+  "member": {
+    "id": 151722,
+    "username": "RapidData",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/5c40/1c40/151722_mini.png?m=1450273125",
+    "avatar_normal": "//cdn.v2ex.co/avatar/5c40/1c40/151722_normal.png?m=1450273125",
+    "avatar_large": "//cdn.v2ex.co/avatar/5c40/1c40/151722_large.png?m=1450273125"
+  },
+  "node": {
+    "id": 337,
+    "name": "webmaster",
+    "title": "站长",
+    "title_alternative": "Webmaster",
+    "url": "http://www.v2ex.com/go/webmaster",
+    "topics": 654,
+    "avatar_mini": "//cdn.v2ex.co/navatar/357a/6fdf/337_mini.png?m=1450843111",
+    "avatar_normal": "//cdn.v2ex.co/navatar/357a/6fdf/337_normal.png?m=1450843111",
+    "avatar_large": "//cdn.v2ex.co/navatar/357a/6fdf/337_large.png?m=1450843111"
+  },
+  "created": 1450966096,
+  "last_modified": 1450966096,
+  "last_touched": 1450955296
+}, {
+  "id": 245945,
+  "title": "［坐标广州］她他社 资深系统架构师（ php） 15k\u002D25k",
+  "url": "http://www.v2ex.com/t/245945",
+  "content": "职位描述:\u000D\u000A1. 深入发掘和分析业务需求，撰写技术方案和系统设计；\u000D\u000A2. 参与技术方案和系统设计评审；把握复杂系统的设计，确保系统的架构质量；\u000D\u000A3. 系统核心部分代码编写；疑难问题的解决；\u000D\u000A4. 对现存或未来系统进行宏观的思考，规划形成统一的框架、平台或组件；\u000D\u000A5. 指导和培训工程师，让团队成员在你的影响下取得成长；\u000D\u000A6. 为团队引入创新的技术、创新的解决方案，用创新的思路解决问题。\u000D\u000A\u000D\u000A\u000D\u000A职位要求：\u000D\u000A1 、 本科以上学历，计算机科学或相关专业优先；\u000D\u000A2 、 熟练掌握 PHP 语言，熟悉 PHP 开源框架，精通 PHP+MySQL 开发；\u000D\u000A3 、五年以上使用 php 开发的经验，两年以上电商相关开发经验，对于你用过的开源框架，能理解到它的原理和机制；\u000D\u000A4 、熟悉数据库建模，具有数据库设计经验，熟练应用 MySQL ，丰富的 MySQL 优化经历；\u000D\u000A5 、具备 Redis ， Memcached, RabbitMQ 等应用优化经验优先；\u000D\u000A6 、熟悉 zookeeper 分布式解决方案优先；\u000D\u000A7 、熟练使用 java 的可以加分。\u000D\u000A\u000D\u000AHR 姐姐联系方式：\u000D\u000Ahr@ta2she.com",
+  "content_rendered": "\u003Cp\u003E职位描述:\u003Cbr\u003E\u000A1. 深入发掘和分析业务需求，撰写技术方案和系统设计；\u003Cbr\u003E\u000A2. 参与技术方案和系统设计评审；把握复杂系统的设计，确保系统的架构质量；\u003Cbr\u003E\u000A3. 系统核心部分代码编写；疑难问题的解决；\u003Cbr\u003E\u000A4. 对现存或未来系统进行宏观的思考，规划形成统一的框架、平台或组件；\u003Cbr\u003E\u000A5. 指导和培训工程师，让团队成员在你的影响下取得成长；\u003Cbr\u003E\u000A6. 为团队引入创新的技术、创新的解决方案，用创新的思路解决问题。\u003C/p\u003E\u000A\u000A\u003Cp\u003E职位要求：\u003Cbr\u003E\u000A1 、 本科以上学历，计算机科学或相关专业优先；\u003Cbr\u003E\u000A2 、 熟练掌握 PHP 语言，熟悉 PHP 开源框架，精通 PHP+MySQL 开发；\u003Cbr\u003E\u000A3 、五年以上使用 php 开发的经验，两年以上电商相关开发经验，对于你用过的开源框架，能理解到它的原理和机制；\u003Cbr\u003E\u000A4 、熟悉数据库建模，具有数据库设计经验，熟练应用 MySQL ，丰富的 MySQL 优化经历；\u003Cbr\u003E\u000A5 、具备 Redis ， Memcached, RabbitMQ 等应用优化经验优先；\u003Cbr\u003E\u000A6 、熟悉 zookeeper 分布式解决方案优先；\u003Cbr\u003E\u000A7 、熟练使用 java 的可以加分。\u003C/p\u003E\u000A\u000A\u003Cp\u003EHR 姐姐联系方式：\u003Cbr\u003E\u000A\u003Ca target\u003D\u0022_blank\u0022 rel\u003D\u0022nofollow\u0022 href\u003D\u0022mailto:hr@ta2she.com\u0022\u003Ehr@ta2she.com\u003C/a\u003E\u003C/p\u003E\u000A",
+  "replies": 0,
+  "member": {
+    "id": 151827,
+    "username": "lynnlin",
+    "tagline": "跪求技术大牛",
+    "avatar_mini": "//cdn.v2ex.co/avatar/f0ac/7bfb/151827_mini.png?m=1450949289",
+    "avatar_normal": "//cdn.v2ex.co/avatar/f0ac/7bfb/151827_normal.png?m=1450949289",
+    "avatar_large": "//cdn.v2ex.co/avatar/f0ac/7bfb/151827_large.png?m=1450949289"
+  },
+  "node": {
+    "id": 43,
+    "name": "jobs",
+    "title": "酷工作",
+    "title_alternative": "Jobs",
+    "url": "http://www.v2ex.com/go/jobs",
+    "topics": 13393,
+    "avatar_mini": "//cdn.v2ex.co/navatar/17e6/2166/43_mini.png?m=1450842771",
+    "avatar_normal": "//cdn.v2ex.co/navatar/17e6/2166/43_normal.png?m=1450842771",
+    "avatar_large": "//cdn.v2ex.co/navatar/17e6/2166/43_large.png?m=1450842771"
+  },
+  "created": 1450965878,
+  "last_modified": 1450965943,
+  "last_touched": 1450951478
+}, {
+  "id": 245944,
+  "title": "明天学校让我交个作品，做个什么好",
+  "url": "http://www.v2ex.com/t/245944",
+  "content": "高中的，随便做什么都行 （ Win32 EXE ）",
+  "content_rendered": "高中的，随便做什么都行 （ Win32 EXE ）",
+  "replies": 0,
+  "member": {
+    "id": 82581,
+    "username": "wbsdty331",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/2b6f/6139/82581_mini.png?m=1423498734",
+    "avatar_normal": "//cdn.v2ex.co/avatar/2b6f/6139/82581_normal.png?m=1423498734",
+    "avatar_large": "//cdn.v2ex.co/avatar/2b6f/6139/82581_large.png?m=1423498734"
+  },
+  "node": {
+    "id": 12,
+    "name": "qna",
+    "title": "问与答",
+    "title_alternative": "Questions and Answers",
+    "url": "http://www.v2ex.com/go/qna",
+    "topics": 61884,
+    "avatar_mini": "//cdn.v2ex.co/navatar/c20a/d4d7/12_mini.png?m=1448889637",
+    "avatar_normal": "//cdn.v2ex.co/navatar/c20a/d4d7/12_normal.png?m=1448889637",
+    "avatar_large": "//cdn.v2ex.co/navatar/c20a/d4d7/12_large.png?m=1448889637"
+  },
+  "created": 1450965831,
+  "last_modified": 1450965831,
+  "last_touched": 1450792851
+}, {
+  "id": 245943,
+  "title": "有没有介绍国内 小而美 团队的 Website or App",
+  "url": "http://www.v2ex.com/t/245943",
+  "content": "这对工程师在考虑是否要加入某个团队能提供些参考",
+  "content_rendered": "\u003Cp\u003E这对工程师在考虑是否要加入某个团队能提供些参考\u003C/p\u003E\u000A",
+  "replies": 1,
+  "member": {
+    "id": 117112,
+    "username": "fakesnow",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/gravatar/3cf8ee748cf3583093e5328ba2cc98d7?s=24&d=retro",
+    "avatar_normal": "//cdn.v2ex.co/gravatar/3cf8ee748cf3583093e5328ba2cc98d7?s=48&d=retro",
+    "avatar_large": "//cdn.v2ex.co/gravatar/3cf8ee748cf3583093e5328ba2cc98d7?s=73&d=retro"
+  },
+  "node": {
+    "id": 445,
+    "name": "tech",
+    "title": "科技",
+    "title_alternative": "Technology",
+    "url": "http://www.v2ex.com/go/tech",
+    "topics": 27,
+    "avatar_mini": "/static/img/node_mini.png",
+    "avatar_normal": "/static/img/node_normal.png",
+    "avatar_large": "/static/img/node_large.png"
+  },
+  "created": 1450965249,
+  "last_modified": 1450965249,
+  "last_touched": 1450966588
+}, {
+  "id": 245939,
+  "title": "请问上海固定 IP 的企业精品网 IP 是什么开头的？",
+  "url": "http://www.v2ex.com/t/245939",
+  "content": "",
+  "content_rendered": "",
+  "replies": 0,
+  "member": {
+    "id": 147338,
+    "username": "luchen",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/gravatar/c29d5b443633f276df9aa5a9330e6ffe?s=24&d=retro",
+    "avatar_normal": "//cdn.v2ex.co/gravatar/c29d5b443633f276df9aa5a9330e6ffe?s=48&d=retro",
+    "avatar_large": "//cdn.v2ex.co/gravatar/c29d5b443633f276df9aa5a9330e6ffe?s=73&d=retro"
+  },
+  "node": {
+    "id": 108,
+    "name": "bb",
+    "title": "宽带症候群",
+    "title_alternative": "Broadband Symptom Complex",
+    "url": "http://www.v2ex.com/go/bb",
+    "topics": 1164,
+    "avatar_mini": "//cdn.v2ex.co/navatar/a3c6/5c29/108_mini.png?m=1441773183",
+    "avatar_normal": "//cdn.v2ex.co/navatar/a3c6/5c29/108_normal.png?m=1441773183",
+    "avatar_large": "//cdn.v2ex.co/navatar/a3c6/5c29/108_large.png?m=1441773183"
+  },
+  "created": 1450964079,
+  "last_modified": 1450964079,
+  "last_touched": 1450963899
+}, {
+  "id": 245938,
+  "title": "mac 权限请教",
+  "url": "http://www.v2ex.com/t/245938",
+  "content": "请教一个问题：\u000D\u000A\u000D\u000A在 mac 下如何获得最高权限，比如有时候虽然做一些操作用 sudo mv abc.txt /bin 这样的还可以。但是也有一些做不了，比如我要修改 /etc/profile 环境变量，就无法打开，貌似要 chmod 一下，有没有办法在 Mac 下获得 root 权限啊？\u000D\u000A\u000D\u000A\u000D\u000A另外一个问题：\u000D\u000A\u000D\u000A刚编译了一个 boost 库，生成了一些 include 目录和 lib 目录，我如何加载到系统的 path 下？",
+  "content_rendered": "\u003Cp\u003E请教一个问题：\u003C/p\u003E\u000A\u000A\u003Cp\u003E在 mac 下如何获得最高权限，比如有时候虽然做一些操作用 sudo mv abc.txt /bin 这样的还可以。但是也有一些做不了，比如我要修改 /etc/profile 环境变量，就无法打开，貌似要 chmod 一下，有没有办法在 Mac 下获得 root 权限啊？\u003C/p\u003E\u000A\u000A\u003Cp\u003E另外一个问题：\u003C/p\u003E\u000A\u000A\u003Cp\u003E刚编译了一个 boost 库，生成了一些 include 目录和 lib 目录，我如何加载到系统的 path 下？\u003C/p\u003E\u000A",
+  "replies": 1,
+  "member": {
+    "id": 149193,
+    "username": "hailongs",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/gravatar/a2e9523f759943840e5072d9e127446a?s=24&d=retro",
+    "avatar_normal": "//cdn.v2ex.co/gravatar/a2e9523f759943840e5072d9e127446a?s=48&d=retro",
+    "avatar_large": "//cdn.v2ex.co/gravatar/a2e9523f759943840e5072d9e127446a?s=73&d=retro"
+  },
+  "node": {
+    "id": 10,
+    "name": "mbp",
+    "title": "MacBook Pro",
+    "title_alternative": "MacBook Pro",
+    "url": "http://www.v2ex.com/go/mbp",
+    "topics": 1987,
+    "avatar_mini": "//cdn.v2ex.co/navatar/d3d9/4468/10_mini.png?m=1438332810",
+    "avatar_normal": "//cdn.v2ex.co/navatar/d3d9/4468/10_normal.png?m=1438332810",
+    "avatar_large": "//cdn.v2ex.co/navatar/d3d9/4468/10_large.png?m=1438332810"
+  },
+  "created": 1450963385,
+  "last_modified": 1450963385,
+  "last_touched": 1450952585
+}, {
+  "id": 245937,
+  "title": "Python 有获取加载完页面又去做别的请求的方法吗？",
+  "url": "http://www.v2ex.com/t/245937",
+  "content": "比如 Chrome 的 network 列表。",
+  "content_rendered": "比如 Chrome 的 network 列表。",
+  "replies": 3,
+  "member": {
+    "id": 152470,
+    "username": "lszxlong",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/gravatar/b725bce64bcd8e46065eb57ae1270911?s=24&d=retro",
+    "avatar_normal": "//cdn.v2ex.co/gravatar/b725bce64bcd8e46065eb57ae1270911?s=48&d=retro",
+    "avatar_large": "//cdn.v2ex.co/gravatar/b725bce64bcd8e46065eb57ae1270911?s=73&d=retro"
+  },
+  "node": {
+    "id": 90,
+    "name": "python",
+    "title": "Python",
+    "title_alternative": "Python",
+    "url": "http://www.v2ex.com/go/python",
+    "topics": 4169,
+    "avatar_mini": "//cdn.v2ex.co/navatar/8613/985e/90_mini.png?m=1450824590",
+    "avatar_normal": "//cdn.v2ex.co/navatar/8613/985e/90_normal.png?m=1450824590",
+    "avatar_large": "//cdn.v2ex.co/navatar/8613/985e/90_large.png?m=1450824590"
+  },
+  "created": 1450963261,
+  "last_modified": 1450963261,
+  "last_touched": 1450966244
+}, {
+  "id": 245936,
+  "title": "淘宝那些「微信多开版」是通过什么方式多开并且签名的？",
+  "url": "http://www.v2ex.com/t/245936",
+  "content": "拿不到源码吧？我试过某个分发站的企业签名，是会签名失败的。",
+  "content_rendered": "拿不到源码吧？我试过某个分发站的企业签名，是会签名失败的。",
+  "replies": 2,
+  "member": {
+    "id": 38603,
+    "username": "DearTanker",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/0342/b022/38603_mini.png?m=1427027674",
+    "avatar_normal": "//cdn.v2ex.co/avatar/0342/b022/38603_normal.png?m=1427027674",
+    "avatar_large": "//cdn.v2ex.co/avatar/0342/b022/38603_large.png?m=1427027674"
+  },
+  "node": {
+    "id": 12,
+    "name": "qna",
+    "title": "问与答",
+    "title_alternative": "Questions and Answers",
+    "url": "http://www.v2ex.com/go/qna",
+    "topics": 61884,
+    "avatar_mini": "//cdn.v2ex.co/navatar/c20a/d4d7/12_mini.png?m=1448889637",
+    "avatar_normal": "//cdn.v2ex.co/navatar/c20a/d4d7/12_normal.png?m=1448889637",
+    "avatar_large": "//cdn.v2ex.co/navatar/c20a/d4d7/12_large.png?m=1448889637"
+  },
+  "created": 1450963223,
+  "last_modified": 1450963223,
+  "last_touched": 1450968217
+}, {
+  "id": 245935,
+  "title": "如何快速找到女朋友？",
+  "url": "http://www.v2ex.com/t/245935",
+  "content": "以前认为随缘就好，这么多年了，我还是一个人。马上就是圣诞节了，突然觉得很孤单。 \u000D\u000A\u000D\u000A现在我知道的方法有：经常主动搭讪、用知识征服她、变得有钱、多点幽默感（我长相一般）... \u000D\u000A所以最近有尝试着跟女生搭讪，在图书馆要到了一个女生的号码，但是后面不知道该怎么聊了 \u000D\u000A\u000D\u000A那么还有哪些更好的实践方法呢，请有经验的人来指导一下",
+  "content_rendered": "\u003Cp\u003E以前认为随缘就好，这么多年了，我还是一个人。马上就是圣诞节了，突然觉得很孤单。 \u003C/p\u003E\u000A\u000A\u003Cp\u003E现在我知道的方法有：经常主动搭讪、用知识征服她、变得有钱、多点幽默感（我长相一般）... \u003Cbr\u003E\u000A所以最近有尝试着跟女生搭讪，在图书馆要到了一个女生的号码，但是后面不知道该怎么聊了 \u003C/p\u003E\u000A\u000A\u003Cp\u003E那么还有哪些更好的实践方法呢，请有经验的人来指导一下\u003C/p\u003E\u000A",
+  "replies": 21,
+  "member": {
+    "id": 92017,
+    "username": "yangtze",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/avatar/da73/2b20/92017_mini.png?m=1437010631",
+    "avatar_normal": "//cdn.v2ex.co/avatar/da73/2b20/92017_normal.png?m=1437010631",
+    "avatar_large": "//cdn.v2ex.co/avatar/da73/2b20/92017_large.png?m=1437010631"
+  },
+  "node": {
+    "id": 12,
+    "name": "qna",
+    "title": "问与答",
+    "title_alternative": "Questions and Answers",
+    "url": "http://www.v2ex.com/go/qna",
+    "topics": 61884,
+    "avatar_mini": "//cdn.v2ex.co/navatar/c20a/d4d7/12_mini.png?m=1448889637",
+    "avatar_normal": "//cdn.v2ex.co/navatar/c20a/d4d7/12_normal.png?m=1448889637",
+    "avatar_large": "//cdn.v2ex.co/navatar/c20a/d4d7/12_large.png?m=1448889637"
+  },
+  "created": 1450963153,
+  "last_modified": 1450963288,
+  "last_touched": 1450967971
+}, {
+  "id": 245934,
+  "title": "Django 中如何实现 url 自由配置",
+  "url": "http://www.v2ex.com/t/245934",
+  "content": "初学 web ，选了 Django 来开发一个博客程序，比如当前我所在的页面网址为\u000D\u000Ahttp://127.0.0.1:8000/2/\u000D\u000A然后页面内一个 btn 的 herf 想直接跳转到\u000D\u000Ahttp://127.0.0.1:8000/modify/2\u000D\u000ADjango 当前页面可以用 url, 比如可以写成\u000D\u000A\u003Cspan class \u003D \u0022link edit\u0022\u003E\u003Ca href\u003D\u0022{% url \u0027modify\u0027%}\u0022\u003Emodify\u003C/span\u003E\u000D\u000A但是这样最终发出的网址就是 http://127.0.0.1:8000/2/modify 了；\u000D\u000A而我想是发出 http://127.0.0.1:8000/modify/2\u000D\u000A该如何写呢？试了几种方法都编译报错。😓",
+  "content_rendered": "\u003Cp\u003E初学 web ，选了 Django 来开发一个博客程序，比如当前我所在的页面网址为\u003Cbr\u003E\u000A\u003Ca target\u003D\u0022_blank\u0022 rel\u003D\u0022nofollow\u0022 href\u003D\u0022http://127.0.0.1:8000/2/\u0022\u003Ehttp://127.0.0.1:8000/2/\u003C/a\u003E\u003Cbr\u003E\u000A然后页面内一个 btn 的 herf 想直接跳转到\u003Cbr\u003E\u000A\u003Ca target\u003D\u0022_blank\u0022 rel\u003D\u0022nofollow\u0022 href\u003D\u0022http://127.0.0.1:8000/modify/2\u0022\u003Ehttp://127.0.0.1:8000/modify/2\u003C/a\u003E\u003Cbr\u003E\u000ADjango 当前页面可以用 url, 比如可以写成\u003Cbr\u003E\u000A\u0026lt\u003Bspan class \u003D \u0026quot\u003Blink edit\u0026quot\u003B\u0026gt\u003B\u0026lt\u003Ba href\u003D\u0026quot\u003B{% url \u0026#39\u003Bmodify\u0026#39\u003B%}\u0026quot\u003B\u0026gt\u003Bmodify\u0026lt\u003B/span\u0026gt\u003B\u003Cbr\u003E\u000A但是这样最终发出的网址就是 \u003Ca target\u003D\u0022_blank\u0022 rel\u003D\u0022nofollow\u0022 href\u003D\u0022http://127.0.0.1:8000/2/modify\u0022\u003Ehttp://127.0.0.1:8000/2/modify\u003C/a\u003E 了；\u003Cbr\u003E\u000A而我想是发出 \u003Ca target\u003D\u0022_blank\u0022 rel\u003D\u0022nofollow\u0022 href\u003D\u0022http://127.0.0.1:8000/modify/2\u0022\u003Ehttp://127.0.0.1:8000/modify/2\u003C/a\u003E\u003Cbr\u003E\u000A该如何写呢？试了几种方法都编译报错。😓\u003C/p\u003E\u000A",
+  "replies": 11,
+  "member": {
+    "id": 80938,
+    "username": "boyhailong",
+    "tagline": "",
+    "avatar_mini": "//cdn.v2ex.co/gravatar/c44c38834d429d06c537c451e6a4a119?s=24&d=retro",
+    "avatar_normal": "//cdn.v2ex.co/gravatar/c44c38834d429d06c537c451e6a4a119?s=48&d=retro",
+    "avatar_large": "//cdn.v2ex.co/gravatar/c44c38834d429d06c537c451e6a4a119?s=73&d=retro"
+  },
+  "node": {
+    "id": 431,
+    "name": "django",
+    "title": "Django",
+    "title_alternative": "Django",
+    "url": "http://www.v2ex.com/go/django",
+    "topics": 174,
+    "avatar_mini": "//cdn.v2ex.co/navatar/6636/8270/431_mini.png?m=1341249779",
+    "avatar_normal": "//cdn.v2ex.co/navatar/6636/8270/431_normal.png?m=1341249779",
+    "avatar_large": "//cdn.v2ex.co/navatar/6636/8270/431_large.png?m=1341249779"
+  },
+  "created": 1450963099,
+  "last_modified": 1450963099,
+  "last_touched": 1450968323
+}
+]
