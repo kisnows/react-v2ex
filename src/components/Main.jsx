@@ -19,13 +19,13 @@ export default class Main extends Component {
 
   componentDidMount() {
     const _this = this
-    get('/api/hot.json').then(function (data) {
+    get('./api/hot.json').then(function (data) {
       // console.log(data)
       _this.setState( { hot: data })
     }).catch(function (err) {
       console.error( err )
     })
-    get('/api/latest.json').then(function (data) {
+    get('./api/latest.json').then(function (data) {
       _this.setState({ latest: data })
     }).catch(function (err) {
       console.error(err)

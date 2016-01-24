@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "v2ex demo power by react",
   "scripts": {
-    "lint": "eslint src test ./src/*.*",
+    "lint": "eslint src test ./src/*.jsx",
     "dev": "node server.js --devtool eval --progress --colors --hot",
-    "deploy": "set NODE_ENV=production&webpack -p --progress --profile -colors"
+    "build": "set NODE_ENV=production&webpack -p --progress --profile -colors"
   },
   "repository": {
     "type": "git",

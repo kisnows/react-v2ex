@@ -4,7 +4,7 @@
  * Created 2015-12-21
  */
 import React, { PropTypes, Component } from 'react'
-import Hot from '../../api/hot.json'
+import Hot from '../api/hot.json'
 
 class TopicsHot extends Component {
   constructor(props) {
